@@ -1,7 +1,6 @@
 package com.testdriven.stormpath;
 
-import static com.jayway.restassured.RestAssured.basic;
-import static com.jayway.restassured.RestAssured.expect;
+import static com.jayway.restassured.RestAssured.*;
 
 import com.jayway.restassured.RestAssured;
 
@@ -14,9 +13,8 @@ public class Client {
 		RestAssured.basePath = "/v1";
 		RestAssured.authentication = basic(username, password);
 		RestAssured.requestContentType("application/json");
-		expect() .log().all()
-			.statusCode(200)
-		.when().get("/tenants/current");
+		//connect by looking up current tenant
+		Tenant.findCurrent();
 	}
 
 }

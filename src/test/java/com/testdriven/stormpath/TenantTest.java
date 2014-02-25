@@ -19,16 +19,13 @@ public class TenantTest {
 		assertTrue(tenant.name.length() > 0);
 	}
 	
+	//TODO move to ApplicationTest
 	@Test public void
 	find_application_by_name() {
 		Tenant tenant = Tenant.findCurrent();
-		Application appFound = Application.findByName("app120X2JdXHiQQ4nkVIfW3Hig");
-		assertEquals("app120X2JdXHiQQ4nkVIfW3Hig", appFound.name);
+		Application appFound = Application.findByName("Stormpath");
+		assertEquals("Stormpath", appFound.name);
 	}
 	
-	@Test public void
-	delete_all() {
-		Application.deleteAll();
-	}
 
 }
