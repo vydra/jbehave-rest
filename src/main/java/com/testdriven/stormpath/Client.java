@@ -14,7 +14,7 @@ public class Client {
 		RestAssured.basePath = "/v1";
 		RestAssured.authentication = basic(username, password);
 		RestAssured.requestContentType("application/json");
-		expect() //.log().all()
+		expect() .log().all()
 			.statusCode(200)
 		.when().get("/tenants/current");
 	}

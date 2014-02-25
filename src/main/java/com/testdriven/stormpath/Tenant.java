@@ -1,19 +1,34 @@
 package com.testdriven.stormpath;
 
-import static org.hamcrest.Matchers.*;
-import static com.jayway.restassured.RestAssured.*;
+import static com.jayway.restassured.RestAssured.expect;
 
 public class Tenant extends AbstractResource {
 
+	public String name;
+	public String key;
+	HRef applications;
+
 	public static Tenant findCurrent() {
-		given().   log().all().
-	     expect().   log().all().
-	          statusCode(200).
-	          header("Set-Cookie", startsWith("rememberMe=deleteMe; Path=/; Max-Age=0; Expires=")).
-	          body("name", equalTo( "foo" )).
-	     when().
-	       get("/tenants/current");
-		return null;
+		Tenant tenant = expect().statusCode(200).when().get("/tenants/current")
+				.as(Tenant.class);
+		return tenant;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Tenant [name=");
+		builder.append(name);
+		builder.append(", key=");
+		builder.append(key);
+		builder.append(", applications=");
+		builder.append(applications);
+		builder.append(", href=");
+		builder.append(href);
+		builder.append("]");
+		return builder.toString();
+	}
+
+	
 
 }
